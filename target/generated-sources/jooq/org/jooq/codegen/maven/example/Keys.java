@@ -33,5 +33,6 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<EmployeesRecord, EmployeesRecord> EMPLOYEES__EMPLOYEES_CHIEFID_FKEY = Internal.createForeignKey(Employees.EMPLOYEES, DSL.name("employees_chiefid_fkey"), new TableField[] { Employees.EMPLOYEES.CHIEFID }, Keys.EMPLOYEES_PKEY, new TableField[] { Employees.EMPLOYEES.ID }, true);
     public static final ForeignKey<TasksRecord, EmployeesRecord> TASKS__TASKS_EMPLOYEEID_FKEY = Internal.createForeignKey(Tasks.TASKS, DSL.name("tasks_employeeid_fkey"), new TableField[] { Tasks.TASKS.EMPLOYEEID }, Keys.EMPLOYEES_PKEY, new TableField[] { Employees.EMPLOYEES.ID }, true);
 }

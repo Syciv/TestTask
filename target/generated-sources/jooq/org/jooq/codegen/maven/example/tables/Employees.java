@@ -4,12 +4,15 @@
 package org.jooq.codegen.maven.example.tables;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -64,6 +67,11 @@ public class Employees extends TableImpl<EmployeesRecord> {
      */
     public final TableField<EmployeesRecord, String> FILIAL = createField(DSL.name("filial"), SQLDataType.VARCHAR, this, "");
 
+    /**
+     * The column <code>public.employees.chiefid</code>.
+     */
+    public final TableField<EmployeesRecord, Integer> CHIEFID = createField(DSL.name("chiefid"), SQLDataType.INTEGER, this, "");
+
     private Employees(Name alias, Table<EmployeesRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -113,6 +121,20 @@ public class Employees extends TableImpl<EmployeesRecord> {
     }
 
     @Override
+    public List<ForeignKey<EmployeesRecord, ?>> getReferences() {
+        return Arrays.asList(Keys.EMPLOYEES__EMPLOYEES_CHIEFID_FKEY);
+    }
+
+    private transient Employees _employees;
+
+    public Employees employees() {
+        if (_employees == null)
+            _employees = new Employees(this, Keys.EMPLOYEES__EMPLOYEES_CHIEFID_FKEY);
+
+        return _employees;
+    }
+
+    @Override
     public Employees as(String alias) {
         return new Employees(DSL.name(alias), this);
     }
@@ -139,11 +161,11 @@ public class Employees extends TableImpl<EmployeesRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, String, String, String> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row5<Integer, String, String, String, Integer> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }

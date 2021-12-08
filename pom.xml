@@ -18,6 +18,18 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springframework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <!-- Spring -->
         <dependency>
@@ -31,19 +43,30 @@
             <scope>test</scope>
             <version>${springframework.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jooq</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
 
-        <!-- DataBase -->
+        <!-- БД -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgres.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>4.6.1</version>
-        </dependency>
+        </dependency> -->
 
         <!-- Jooq -->
         <dependency>
@@ -62,6 +85,15 @@
             <version>${jooq.version}</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- Другое -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <optional>true</optional>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -114,6 +146,8 @@
                         <target>
                             <packageName>org.jooq.codegen.maven.example</packageName>
                             <directory>target/generated-sources/jooq</directory>
+                            <packageName>com.jooq.db</packageName>
+                            <directory>src/main/java/com/jooq</directory>
                         </target>
                     </generator>
                 </configuration>
