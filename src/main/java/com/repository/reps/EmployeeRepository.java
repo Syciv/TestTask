@@ -4,7 +4,7 @@ import com.dto.EmployeeDto;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.repository.CrudRepository;
+import com.repository.CRUDRepository;
 import java.util.List;
 
 import static org.jooq.codegen.maven.example.tables.Employees.EMPLOYEES;
@@ -15,7 +15,7 @@ import static org.jooq.codegen.maven.example.tables.Employees.EMPLOYEES;
 *
 * */
 @Repository
-public class EmployeeRepository implements CrudRepository<EmployeeDto> {
+public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
 
     private final DSLContext dsl;
 
@@ -34,7 +34,7 @@ public class EmployeeRepository implements CrudRepository<EmployeeDto> {
     }
 
     @Override
-    public EmployeeDto findId(Integer id){
+    public EmployeeDto findById(Integer id){
         return dsl.selectFrom(EMPLOYEES)
                 .where(EMPLOYEES.ID.equal(id))
                 .fetchOne()

@@ -14,28 +14,25 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeesController {
 
-    private final EmployeeRepository employeeCrud;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeesController(EmployeeRepository employeeCrud){
-        this.employeeCrud = employeeCrud;
+    public EmployeesController(EmployeeRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public EmployeeDto addEmployee(EmployeeDto empl){
-        EmployeeDto added = employeeCrud.insert(empl);
-        return added;
+        return employeeRepository.insert(empl);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<EmployeeDto> getAll(){
-        List<EmployeeDto> empList = employeeCrud.findAll();
-        return  empList;
+        return employeeRepository.findAll();
     }
 
     @RequestMapping(value = "/{id}",  method = RequestMethod.GET)
     public EmployeeDto getById(@PathVariable("id") Integer id){
-        EmployeeDto employee = employeeCrud.findId(id);
-        return  employee;
+        return employeeRepository.findById(id);
     }
 }

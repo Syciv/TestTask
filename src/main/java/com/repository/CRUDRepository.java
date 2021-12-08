@@ -1,12 +1,11 @@
 package com.repository;
 
 import java.util.List;
-import org.jooq.Condition;
 
-public interface CrudRepository<T> {
+public interface CRUDRepository<T> {
     T insert(T t);
     T update(T t);
-    T findId(Integer id);
+    T findById(Integer id);
     List<T> findAll();
     Boolean deleteId(Integer id);
 }
