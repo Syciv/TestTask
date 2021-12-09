@@ -8,12 +8,8 @@ import com.repository.CRUDRepository;
 import java.util.List;
 
 import static org.jooq.codegen.maven.example.tables.Employees.EMPLOYEES;
-/*
-*
-*
-*
-*
-* */
+
+
 @Repository
 public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
 

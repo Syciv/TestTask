@@ -6,3 +6,5 @@ spring:
     url: jdbc:postgresql://localhost:5432/TestTask
     username: postgres
     password: admin
+    hikari:
+      connectionTimeout=30000

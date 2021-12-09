@@ -4,11 +4,13 @@ import com.dto.TaskDto;
 import com.repository.CRUDRepository;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static org.jooq.codegen.maven.example.tables.Tasks.TASKS;
 
+@Repository
 public class TaskRepository implements CRUDRepository<TaskDto> {
     private final DSLContext dsl;
 
