@@ -44,6 +44,14 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
                 .into(EmployeeDto.class);
     }
 
+    public EmployeeDto findChiefById(Integer Id){
+        EmployeeDto empl = findById(Id);
+        return dsl.selectFrom(EMPLOYEES)
+                .where(EMPLOYEES.ID.equal(empl.getChiefId()))
+                .fetchOne()
+                .into(EmployeeDto.class);
+    }
+
     @Override
     public EmployeeDto update(EmployeeDto empl){
         return dsl.update(EMPLOYEES)

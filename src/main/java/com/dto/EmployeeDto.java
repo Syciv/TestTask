@@ -1,8 +1,9 @@
 package com.dto;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class EmployeeDto {
     private Integer Id;
     private String Post;

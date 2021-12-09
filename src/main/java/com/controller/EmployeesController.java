@@ -35,4 +35,9 @@ public class EmployeesController {
     public EmployeeDto getById(@PathVariable("id") Integer id){
         return employeeRepository.findById(id);
     }
+
+    @RequestMapping(value = "/chiefof/{id}",  method = RequestMethod.GET)
+    public EmployeeDto getChiefById(@PathVariable("id") Integer id){
+        return employeeRepository.findChiefById(id);
+    }
 }
