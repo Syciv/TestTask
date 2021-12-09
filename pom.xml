@@ -55,12 +55,11 @@
             <version>${postgres.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <!--
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>4.6.1</version>
-        </dependency> -->
+        </dependency>
 
         <!-- Jooq -->
         <dependency>

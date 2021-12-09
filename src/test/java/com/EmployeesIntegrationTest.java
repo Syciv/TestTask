@@ -59,8 +59,10 @@ public class EmployeesIntegrationTest {
     public void allEmployeesShouldBeFound() {
         List<EmployeeDto> found = employeeRepository.findAll();
 
+        Integer num = 3;
+
         assertThat(found.size())
-                .isEqualTo(3);
+                .isEqualTo(num);
     }
 
     @Test
