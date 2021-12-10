@@ -127,7 +127,6 @@
                 <artifactId>jooq-codegen-maven</artifactId>
                 <version>3.15.5</version>
 
-                <!-- The plugin should hook into the generate goal -->
                 <executions>
                     <execution>
                         <goals>
@@ -136,7 +135,6 @@
                     </execution>
                 </executions>
 
-                <!-- Manage the plugin's dependency. In this example, we'll use a PostgreSQL database -->
                 <dependencies>
                     <dependency>
                         <groupId>org.postgresql</groupId>
@@ -145,11 +143,8 @@
                     </dependency>
                 </dependencies>
 
-                <!-- Specify the plugin configuration.
-                     The configuration format is the same as for the standalone code generator -->
                 <configuration>
 
-                    <!-- JDBC connection parameters -->
                     <jdbc>
                         <driver>org.postgresql.Driver</driver>
                         <url>${db.url}</url>
@@ -157,13 +152,10 @@
                         <password>${env.PGPASSWORD}</password>
                     </jdbc>
 
-                    <!-- Generator parameters -->
                     <generator>
                         <database>
                             <name>org.jooq.meta.postgres.PostgresDatabase</name>
                             <includes>.*</includes>
-
-
                             <inputSchema>public</inputSchema>
 
                         </database>

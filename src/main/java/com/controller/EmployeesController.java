@@ -2,10 +2,7 @@ package com.controller;
 
 import com.dto.EmployeeDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.repository.reps.EmployeeRepository;
 
 import java.util.List;
@@ -22,7 +19,7 @@ public class EmployeesController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public EmployeeDto addEmployee(EmployeeDto empl){
+    public EmployeeDto addEmployee(@RequestBody EmployeeDto empl){
         return employeeRepository.insert(empl);
     }
 
@@ -39,5 +36,10 @@ public class EmployeesController {
     @RequestMapping(value = "/chiefof/{id}",  method = RequestMethod.GET)
     public EmployeeDto getChiefById(@PathVariable("id") Integer id){
         return employeeRepository.findChiefById(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public EmployeeDto deleteId(@PathVariable("id") Integer id){
+        return employeeRepository.deleteId(id);
     }
 }

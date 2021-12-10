@@ -1,32 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import EmployeesList from './EmployeesList';
+import EmployeeEdit from './EmployeeEdit';
 
 class App extends Component {
-  state = {
-    employees: []
-  };
-
-  async componentDidMount() {
-    const response = await fetch('/employees/all');
-    const body = await response.json();
-    this.setState({employees: body});
-  }
-
   render() {
-    const {employees} = this.state;
     return (
-        <div className="App">
-          <header className="App-header">
-            <div className="App-intro">
-              <h2>Сотрудники</h2>
-              {employees.map(employee =>
-                  <div key={employee.id}>
-                    {employee.name}
-                  </div>
-              )}
-            </div>
-          </header>
-        </div>
-    );
+        <Router>
+          <Switch>
+            <Route path='/employees' exact={true} component={EmployeesList}/>
+            <Route path='/employees/:id' component={EmployeeEdit}/>
+          </Switch>
+        </Router>
+    )
   }
 }
+
 export default App;

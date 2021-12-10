@@ -9,5 +9,8 @@ public class EmployeeDto {
     private String Post;
     private String Name;
     private String Filial;
-    private Integer ChiefId;
+    private Integer Chiefid;
+
+    private String Chiefname;
+    private Integer Tasksnum;
 }

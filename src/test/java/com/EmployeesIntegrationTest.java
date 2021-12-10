@@ -31,7 +31,7 @@ public class EmployeesIntegrationTest {
 
         anton1.setName("Антон1");
         anton1.setId(15);
-        anton1.setChiefId(10);
+        anton1.setChiefid(10);
 
 
         List<EmployeeDto> all = Arrays.asList(anton, anton1, anton2);

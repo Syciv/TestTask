@@ -7,5 +7,5 @@ public interface CRUDRepository<T> {
     T update(T t);
     T findById(Integer id);
     List<T> findAll();
-    Boolean deleteId(Integer id);
+    T deleteId(Integer id);
 }

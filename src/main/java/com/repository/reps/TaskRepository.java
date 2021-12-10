@@ -60,10 +60,12 @@ public class TaskRepository implements CRUDRepository<TaskDto> {
     }
 
     @Override
-    public Boolean deleteId(Integer Id){
-        return dsl.deleteFrom(TASKS)
+    public TaskDto deleteId(Integer Id){
+        TaskDto task = findById(Id);
+        Boolean executed = dsl.deleteFrom(TASKS)
                 .where(TASKS.ID.equal(Id))
                 .execute() == 1;
+        return task;
     }
 
 
