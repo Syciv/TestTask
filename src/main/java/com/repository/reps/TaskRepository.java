@@ -1,8 +1,10 @@
 package com.repository.reps;
 
 import com.dto.TaskDto;
+import com.mapper.TaskRecordMapper;
 import com.repository.CRUDRepository;
 import org.jooq.DSLContext;
+import org.jooq.codegen.maven.example.tables.records.TasksRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,10 +15,12 @@ import static org.jooq.codegen.maven.example.tables.Tasks.TASKS;
 @Repository
 public class TaskRepository implements CRUDRepository<TaskDto> {
     private final DSLContext dsl;
+    private final TaskRecordMapper mapper;
 
     @Autowired
-    public TaskRepository(DSLContext dsl){
+    public TaskRepository(DSLContext dsl, TaskRecordMapper mapper){
         this.dsl = dsl;
+        this.mapper = mapper;
     }
 
     @Override
@@ -33,14 +37,14 @@ public class TaskRepository implements CRUDRepository<TaskDto> {
         return dsl.selectFrom(TASKS)
                 .where(TASKS.ID.equal(id))
                 .fetchOne()
-                .into(TaskDto.class);
+                .map(r -> mapper.map((TasksRecord) r));
     }
 
     @Override
     public List<TaskDto> findAll(){
         return dsl.selectFrom(TASKS)
                 .fetch()
-                .into(TaskDto.class);
+                .map(r -> mapper.map((TasksRecord) r));
     }
 
     public List<TaskDto> findByUser(Integer uId){
@@ -53,14 +57,17 @@ public class TaskRepository implements CRUDRepository<TaskDto> {
     @Override
     public TaskDto update(TaskDto task){
         return dsl.update(TASKS)
-                .set(dsl.newRecord(TASKS, task))
+                .set(TASKS.DESCRIPTION, task.getDescription())
+                .set(TASKS.PRIORITY,task.getPriority())
+                .set(TASKS.EMPLOYEEID,task.getEmployeeid())
+                .where(TASKS.ID.equal(task.getId()))
                 .returning()
                 .fetchOne()
                 .into(TaskDto.class);
     }
 
     @Override
-    public TaskDto deleteId(Integer Id){
+    public TaskDto deleteById(Integer Id){
         TaskDto task = findById(Id);
         Boolean executed = dsl.deleteFrom(TASKS)
                 .where(TASKS.ID.equal(Id))

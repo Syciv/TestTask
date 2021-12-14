@@ -2,10 +2,11 @@ package com.mapper;
 
 import com.dto.EmployeeDto;
 import com.repository.reps.EmployeeRepository;
-import org.jooq.EmbeddableRecord;
 import org.jooq.RecordMapper;
 import org.jooq.codegen.maven.example.tables.records.EmployeesRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 public class EmployeeRecordMapper implements RecordMapper<EmployeesRecord, EmployeeDto> {
 

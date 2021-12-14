@@ -8,7 +8,7 @@ import com.repository.reps.EmployeeRepository;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/api/employees")
 public class EmployeesController {
 
     private final EmployeeRepository employeeRepository;
@@ -21,6 +21,11 @@ public class EmployeesController {
     @RequestMapping(method = RequestMethod.POST)
     public EmployeeDto addEmployee(@RequestBody EmployeeDto empl){
         return employeeRepository.insert(empl);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public EmployeeDto redactEmployee(@RequestBody EmployeeDto empl){
+        return employeeRepository.update(empl);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -40,6 +45,6 @@ public class EmployeesController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public EmployeeDto deleteId(@PathVariable("id") Integer id){
-        return employeeRepository.deleteId(id);
+        return employeeRepository.deleteById(id);
     }
 }

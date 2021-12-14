@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.dto.EmployeeDto;
 import com.dto.TaskDto;
 import com.repository.reps.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api/tasks")
 public class TasksController {
 
     private final TaskRepository taskRepository;
@@ -19,8 +20,13 @@ public class TasksController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public TaskDto addTask(TaskDto task){
+    public TaskDto addTask(@RequestBody TaskDto task){
         return taskRepository.insert(task);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public TaskDto redactTask(@RequestBody TaskDto task){
+        return taskRepository.update(task);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -36,5 +42,10 @@ public class TasksController {
     @RequestMapping(value = "/user/{uid}", method = RequestMethod.GET)
     public List<TaskDto> getByUser(@PathVariable("uid") Integer uid){
         return taskRepository.findByUser(uid);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public TaskDto deleteId(@PathVariable("id") Integer id){
+        return taskRepository.deleteById(id);
     }
 }

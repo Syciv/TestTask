@@ -8,4 +8,6 @@ public class TaskDto {
     private Integer Priority;
     private String Description;
     private Integer Employeeid;
+
+    private String Employeename;
 }

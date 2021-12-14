@@ -18,10 +18,12 @@ import static org.jooq.codegen.maven.example.tables.Tasks.TASKS;
 public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
 
     private final DSLContext dsl;
+    private final EmployeeRecordMapper mapper;
 
     @Autowired
     public EmployeeRepository(DSLContext dsl){
         this.dsl = dsl;
+        this.mapper =  new EmployeeRecordMapper(this);
     }
 
     @Override
@@ -40,14 +42,14 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
                 .fetchOne();
 
         return result == null ? null:
-                result.map(r -> new EmployeeRecordMapper(this).map((EmployeesRecord) r));
+                result.map(r -> mapper.map((EmployeesRecord) r));
     }
 
     @Override
     public List<EmployeeDto> findAll(){
         return dsl.selectFrom(EMPLOYEES)
                 .fetch()
-                .map(r -> new EmployeeRecordMapper(this).map((EmployeesRecord) r));
+                .map(r -> mapper.map((EmployeesRecord) r));
     }
 
     public EmployeeDto findChiefById(Integer Id){
@@ -64,14 +66,18 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
     @Override
     public EmployeeDto update(EmployeeDto empl){
         return dsl.update(EMPLOYEES)
-                .set(dsl.newRecord(EMPLOYEES, empl))
+                .set(EMPLOYEES.NAME, empl.getName())
+                .set(EMPLOYEES.POST, empl.getPost())
+                .set(EMPLOYEES.FILIAL, empl.getFilial())
+                .set(EMPLOYEES.CHIEFID, empl.getChiefid())
+                .where(EMPLOYEES.ID.equal(empl.getId()))
                 .returning()
                 .fetchOne()
                 .into(EmployeeDto.class);
     }
 
     @Override
-    public EmployeeDto deleteId(Integer Id){
+    public EmployeeDto deleteById(Integer Id){
         EmployeeDto empl = findById(Id);
         Boolean executed = dsl.deleteFrom(EMPLOYEES)
                 .where(EMPLOYEES.ID.equal(Id))
