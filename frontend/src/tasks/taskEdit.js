@@ -4,6 +4,7 @@ import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import { useState, useEffect } from 'react';
 import {addTask, editTask} from '../redux/actions';
 import {connect} from 'react-redux';
+import useStyles from "../style";
 
 
 function TaskEdit(props) {
@@ -15,6 +16,8 @@ function TaskEdit(props) {
     };
 
     const [task, setTask] = useState(emptyTask)
+
+    const classes = useStyles();
 
     const getTask = () => {
        return fetch(`/api/tasks/${props.match.params.id}`)
@@ -47,22 +50,22 @@ function TaskEdit(props) {
 
     const title = <h2>{task.id ? 'Редактировать задачу' : 'Добавить задачу'}</h2>;
     return <div>
-        <Container>
+        <Container align="center">
             {title}
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Label for="description">Описание:</Label>
-                    <Input type="textarea" name="description" id="description" value={task.description || ''}
+                    <Label className={classes.label} for="description">Описание:</Label><br/>
+                    <Input className={classes.input} type="textarea" name="description" id="description" value={task.description || ''}
                            onChange={handleChange} autoComplete="description" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label for="priority">Приоритет:</Label>
-                    <Input type="number" min="1" max="9" onkeypress="return false" name="priority" id="priority" value={task.priority || 1}
+                    <Label className={classes.label} for="priority">Приоритет:</Label><br/>
+                    <Input className={classes.input} type="number" min="1" max="9" onkeypress="return false" name="priority" id="priority" value={task.priority || 1}
                            onChange={handleChange} autoComplete="priority"/>
                 </FormGroup>
                 <FormGroup>
-                    <Label for="employeeid">Исполнитель:</Label>
-                    <Input type="select" name="employeeid" id="employeeid" value={task.employeeid || ''}
+                    <Label className={classes.label} for="employeeid">Исполнитель:</Label><br/>
+                    <Input className={classes.input} type="select" name="employeeid" id="employeeid" value={task.employeeid || ''}
                            onChange={handleChange} autoComplete="employeeid" required>
                            {props.employees.map(e =>
                              {return (

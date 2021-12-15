@@ -4,18 +4,20 @@ import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import { useState, useEffect } from 'react';
 import {addEmployee, editEmployee} from '../redux/actions';
 import {connect} from 'react-redux';
-
+import useStyles from "../style";
 
 function EmployeeEdit(props) {
 
   const emptyEmployee = {
         name: '',
-        filial: '',
+        filialid: '1',
         chiefid: '',
-        post: ''
+        postid: '1'
     };
 
   const [employee, setEmployee] = useState(emptyEmployee)
+
+  const classes = useStyles();
 
   const getEmployee = () => {
        return fetch(`/api/employees/${props.match.params.id}`)
@@ -36,30 +38,30 @@ function EmployeeEdit(props) {
 
   const handleSubmit = event => {
       event.preventDefault();
-
+      console.log(employee);
       if(employee.id){
         props.editEmployee(employee)
       }
       else{
         props.addEmployee(employee)
       }
-     window.location.href ="/employees";
+     //window.location.href ="/employees";
     }
 
 
     const title = <h2>{employee.id ? 'Редактировать сотрудника' : 'Добавить сотрудника'}</h2>;
     return <div>
-        <Container>
+        <Container  align="center">
             {title}
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Label for="name">Имя:</Label>
-                    <Input type="text" name="name" id="name" defaultValue={employee.name || ''}
+                    <Label className={classes.label} for="name">Имя:</Label><br/>
+                    <Input className={classes.input} type="text" name="name" id="name" value={employee.name || ''}
                             onChange={handleChange} autoComplete="name" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label for="filialid">Филиал:</Label>
-                    <Input  type="select" name="filialid" id="filialid" defaultValue={employee.filialid || ''}
+                    <Label className={classes.label} align="left" for="filialid">Филиал:</Label><br/>
+                    <Input className={classes.input} type="select" name="filialid" id="filialid" value={employee.filialid}
                            onChange={handleChange} autoComplete="filialid" required>
                            {props.filials.map(c =>
                              {return (
@@ -70,8 +72,8 @@ function EmployeeEdit(props) {
                     </Input>
                 </FormGroup>
                 <FormGroup>
-                    <Label for="postid">Должность:</Label>
-                    <Input type="select" name="postid" id="postid" defaultValue={employee.postid || ''}
+                    <Label className={classes.label} for="postid">Должность:</Label><br/>
+                    <Input className={classes.input} type="select" name="postid" id="postid" value={employee.postid}
                            onChange={handleChange} autoComplete="postid">
                            {props.posts.map(c =>
                              {return (
@@ -82,8 +84,8 @@ function EmployeeEdit(props) {
                     </Input>
                 </FormGroup>
                 <FormGroup>
-                    <Label for="chiefid">Руководитель:</Label>
-                    <Input type="select" name="chiefid" id="chiefid" defaultValue={employee.chiefid || ''}
+                    <Label className={classes.label} for="chiefid">Руководитель:</Label><br/>
+                    <Input className={classes.input} type="select" name="chiefid" id="chiefid" value={employee.chiefid || ''}
                            onChange={handleChange} autoComplete="chiefid">
                            <option value=''>Нет руководителя</option>
                            {props.employees.map(c =>
@@ -95,8 +97,8 @@ function EmployeeEdit(props) {
                     </Input>
                 </FormGroup>
                 <FormGroup>
-                    <Button color="primary" type="submit">Сохранить</Button>{' '}
-                    <Button color="secondary" tag={Link} to="/employees">Отменить</Button>
+                    <Button  className={classes.button_com} type="submit">Сохранить</Button>{' '}
+                    <Button  className={classes.button_delete} tag={Link} to="/employees">Отменить</Button>
                 </FormGroup>
             </Form>
         </Container>

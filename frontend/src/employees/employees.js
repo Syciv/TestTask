@@ -27,7 +27,7 @@ function Employees(props){
           <td>
               <ButtonGroup>
                   <Button className={classes.button_com} tag={Link} to={"/employees/" + employee.id}>Изменить</Button>
-                  <Button className={classes.button_delete} tag={Link} onClick={()=> props.removeEmployee(employee.id)} >Удалить</Button>
+                  <Button className={classes.button_delete} onClick={()=> props.removeEmployee(employee.id)} >Удалить</Button>
               </ButtonGroup>
           </td>
           </tr>

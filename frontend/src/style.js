@@ -24,6 +24,20 @@ const useStyles = createUseStyles({
     backgroundColor: "#4d7499"
   },
 
+  label: {
+    fontSize: 20,
+    fontWeight: 500,
+  },
+
+  input: {
+    borderRadius: 4,
+    padding: 5,
+    fontSize:20,
+    boxSizing: 'border-box',
+    margin: 8,
+    width: '20%'
+  },
+
   table: {
     width:'100%',
     textAlign: 'center',
@@ -44,6 +58,11 @@ const useStyles = createUseStyles({
   t_row: {
     height: 40,
     border:  '1px solid #eeeeee',
+  },
+
+  cont: {
+    margin: 15,
+    textAlign: 'left',
   }
 
 });
