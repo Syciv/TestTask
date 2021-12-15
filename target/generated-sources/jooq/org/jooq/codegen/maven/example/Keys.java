@@ -7,10 +7,12 @@ package org.jooq.codegen.maven.example;
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
+import org.jooq.codegen.maven.example.tables.Databasechangeloglock;
 import org.jooq.codegen.maven.example.tables.Employees;
 import org.jooq.codegen.maven.example.tables.Filials;
 import org.jooq.codegen.maven.example.tables.Posts;
 import org.jooq.codegen.maven.example.tables.Tasks;
+import org.jooq.codegen.maven.example.tables.records.DatabasechangeloglockRecord;
 import org.jooq.codegen.maven.example.tables.records.EmployeesRecord;
 import org.jooq.codegen.maven.example.tables.records.FilialsRecord;
 import org.jooq.codegen.maven.example.tables.records.PostsRecord;
@@ -30,6 +32,7 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<DatabasechangeloglockRecord> DATABASECHANGELOGLOCK_PKEY = Internal.createUniqueKey(Databasechangeloglock.DATABASECHANGELOGLOCK, DSL.name("databasechangeloglock_pkey"), new TableField[] { Databasechangeloglock.DATABASECHANGELOGLOCK.ID }, true);
     public static final UniqueKey<EmployeesRecord> EMPLOYEES_PKEY = Internal.createUniqueKey(Employees.EMPLOYEES, DSL.name("employees_pkey"), new TableField[] { Employees.EMPLOYEES.ID }, true);
     public static final UniqueKey<FilialsRecord> FILIALS_PKEY = Internal.createUniqueKey(Filials.FILIALS, DSL.name("filials_pkey"), new TableField[] { Filials.FILIALS.ID }, true);
     public static final UniqueKey<PostsRecord> POSTS_PKEY = Internal.createUniqueKey(Posts.POSTS, DSL.name("posts_pkey"), new TableField[] { Posts.POSTS.ID }, true);

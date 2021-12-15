@@ -58,14 +58,28 @@ function EmployeeEdit(props) {
                             onChange={handleChange} autoComplete="name" required/>
                 </FormGroup>
                 <FormGroup>
-                    <Label for="filial">Филиал:</Label>
-                    <Input  type="text" name="filial" id="filial" defaultValue={employee.filial || ''}
-                           onChange={handleChange} autoComplete="filial" required/>
+                    <Label for="filialid">Филиал:</Label>
+                    <Input  type="select" name="filialid" id="filialid" defaultValue={employee.filialid || ''}
+                           onChange={handleChange} autoComplete="filialid" required>
+                           {props.filials.map(c =>
+                             {return (
+                              <option key={c.id} value={c.id}>
+                                {c.name}
+                              </option>)}
+                            )};
+                    </Input>
                 </FormGroup>
                 <FormGroup>
-                    <Label for="post">Должность:</Label>
-                    <Input type="text" name="post" id="post" defaultValue={employee.post || ''}
-                           onChange={handleChange} autoComplete="post" required/>
+                    <Label for="postid">Должность:</Label>
+                    <Input type="select" name="postid" id="postid" defaultValue={employee.postid || ''}
+                           onChange={handleChange} autoComplete="postid">
+                           {props.posts.map(c =>
+                             {return (
+                              <option key={c.id} value={c.id}>
+                                {c.name}
+                              </option>)}
+                            )};
+                    </Input>
                 </FormGroup>
                 <FormGroup>
                     <Label for="chiefid">Руководитель:</Label>
@@ -90,9 +104,13 @@ function EmployeeEdit(props) {
 }
 
 function mapStateToProps(state){
-    const {employeeReducer} = state;
+    const {employeeReducer, othersReducer} = state;
+    console.log(othersReducer.filials);
+    console.log(othersReducer.posts);
     return {
-      employees: employeeReducer.employees
+      employees: employeeReducer.employees,
+      filials: othersReducer.filials,
+      posts: othersReducer.posts
     }
 }
 const mapDispatchToProps = {

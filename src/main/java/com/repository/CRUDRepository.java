@@ -7,6 +7,5 @@ public interface CRUDRepository<T> {
     T update(T t);
     T findById(Integer id);
     List<T> findAll();
-//     List<T> findAllSort(String field);
     T deleteById(Integer id);
 }

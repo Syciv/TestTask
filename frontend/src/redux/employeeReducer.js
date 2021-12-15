@@ -27,8 +27,10 @@ export const employeeReducer = (state = initialState, action) => {
         return {
           id: res.id,
           name: res.name,
-          post: res.post,
-          filial: res.filial,
+          postid: res.postid,
+          postname: res.postname,
+          filialname: res.filialname,
+          filialid: res.filialid,
           chiefid: res.chiefid,
           chiefname: res.chiefname,
           tasksnum: res.tasksnum

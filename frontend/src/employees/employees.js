@@ -6,49 +6,45 @@ import {connect} from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {loadEmployees, removeEmployee} from '../redux/actions';
-
+import useStyles from "../style";
 
 function Employees(props){
 
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(loadEmployees());
-    //   }, []);
-     console.log(props.employees);
+    console.log(props.employees);
+
+    const classes = useStyles();
 
     const emplList = props.employees.map(employee => {
-      return 
-      <tr key={employee.id}>
+      return  <tr className={classes.t_row} key={employee.id}>
           <td>{employee.id} </td>
           <td>{employee.name}</td>
-          <td>{employee.filial}</td>
-          <td>{employee.post}</td>
+          <td>{employee.filialname}</td>
+          <td>{employee.postname}</td>
           <td>{employee.chiefname}</td>
           <td>{employee.tasksnum}</td>
           <td>
               <ButtonGroup>
-                  <Button size="sm" color="primary" tag={Link} to={"/employees/" + employee.id}>Изменить</Button>
-                  <Button size="sm" color="danger" onClick={()=> props.removeEmployee(employee.id)} >Удалить</Button>
+                  <Button className={classes.button_com} tag={Link} to={"/employees/" + employee.id}>Изменить</Button>
+                  <Button className={classes.button_delete} tag={Link} onClick={()=> props.removeEmployee(employee.id)} >Удалить</Button>
               </ButtonGroup>
           </td>
           </tr>
       });
-      return (  
+      return (
         <div>
-          <Container fluid>
-              <div className="float-right">
-                  <Button color="success"  tag={Link} to="/employees/new">Добавить сотрудника</Button>
-              </div>
-              <div className="float-right">
-                  <Button color="success" tag={Link} to="/tasks">К задачам</Button>
+          <Container>
+              <div >
+                  <Button align="left" className={classes.button_com} tag={Link} to="/tasks">К задачам</Button>
+                  <Button align="right" className={classes.button_com} tag={Link} to="/employees/new">Добавить сотрудника</Button>
               </div>
               <h3>Сотрудники</h3>
-              <Table className="mt-4">
-                  <thead>
+              <Table className={classes.table}>
+                  <thead className={classes.t_head}>
                   <tr>
                       <th width="5%" >ID</th>
-                      <th width="15%" >Имя </th>
+                      <th width="15%">Имя </th>
                       <th width="15%">Филиал</th>
                       <th width="15%">Должность</th>
                       <th width="15%">Руководитель</th>
@@ -60,6 +56,7 @@ function Employees(props){
                   {emplList}
                   </tbody>
               </Table>
+
           </Container>
       </div>
     );

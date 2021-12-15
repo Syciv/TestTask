@@ -53,17 +53,17 @@ function TaskEdit(props) {
                 <FormGroup>
                     <Label for="description">Описание:</Label>
                     <Input type="textarea" name="description" id="description" value={task.description || ''}
-                           onChange={handleChange} autoComplete="description"/>
+                           onChange={handleChange} autoComplete="description" required/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="priority">Приоритет:</Label>
-                    <Input type="number" min="1" max="9" onkeypress="return false" name="priority" id="priority" value={task.priority || ''}
+                    <Input type="number" min="1" max="9" onkeypress="return false" name="priority" id="priority" value={task.priority || 1}
                            onChange={handleChange} autoComplete="priority"/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="employeeid">Исполнитель:</Label>
-                    <Input type="select" name="employeeid" id="employeeid" value={task.employeeid || 1}
-                           onChange={handleChange} autoComplete="employeeid">
+                    <Input type="select" name="employeeid" id="employeeid" value={task.employeeid || ''}
+                           onChange={handleChange} autoComplete="employeeid" required>
                            {props.employees.map(e =>
                              {return (
                               <option key={e.id} value={e.id}>

@@ -149,7 +149,7 @@
                         <driver>org.postgresql.Driver</driver>
                         <url>${db.url}</url>
                         <user>${env.PGLOGIN}</user>
-                        <password>${env.PGPASS}</password>
+                        <password>${env.PGPASSWORD}</password>
                     </jdbc>
 
                     <generator>

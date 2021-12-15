@@ -117,3 +117,25 @@ export function loadTasks(){
     })
   }
 }
+
+export function loadFilials(){
+  return async dispatch => {
+    const response = await fetch('/api/filials/all');
+    const jsonData = await response.json();
+    dispatch({
+      type:'LOAD_FILIALS',
+      data: jsonData
+    })
+  }
+}
+
+export function loadPosts(){
+  return async dispatch => {
+    const response = await fetch('/api/posts/all');
+    const jsonData = await response.json();
+    dispatch({
+      type:'LOAD_POSTS',
+      data: jsonData
+    })
+  }
+}

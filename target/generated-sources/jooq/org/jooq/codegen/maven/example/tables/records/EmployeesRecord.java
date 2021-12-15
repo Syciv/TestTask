@@ -63,30 +63,30 @@ public class EmployeesRecord extends UpdatableRecordImpl<EmployeesRecord> implem
     }
 
     /**
-     * Setter for <code>public.employees.filialid</code>.
-     */
-    public void setFilialid(Integer value) {
-        set(3, value);
-    }
-
-    /**
-     * Getter for <code>public.employees.filialid</code>.
-     */
-    public Integer getFilialid() {
-        return (Integer) get(3);
-    }
-
-    /**
      * Setter for <code>public.employees.postid</code>.
      */
     public void setPostid(Integer value) {
-        set(4, value);
+        set(3, value);
     }
 
     /**
      * Getter for <code>public.employees.postid</code>.
      */
     public Integer getPostid() {
+        return (Integer) get(3);
+    }
+
+    /**
+     * Setter for <code>public.employees.filialid</code>.
+     */
+    public void setFilialid(Integer value) {
+        set(4, value);
+    }
+
+    /**
+     * Getter for <code>public.employees.filialid</code>.
+     */
+    public Integer getFilialid() {
         return (Integer) get(4);
     }
 
@@ -130,12 +130,12 @@ public class EmployeesRecord extends UpdatableRecordImpl<EmployeesRecord> implem
 
     @Override
     public Field<Integer> field4() {
-        return Employees.EMPLOYEES.FILIALID;
+        return Employees.EMPLOYEES.POSTID;
     }
 
     @Override
     public Field<Integer> field5() {
-        return Employees.EMPLOYEES.POSTID;
+        return Employees.EMPLOYEES.FILIALID;
     }
 
     @Override
@@ -155,12 +155,12 @@ public class EmployeesRecord extends UpdatableRecordImpl<EmployeesRecord> implem
 
     @Override
     public Integer component4() {
-        return getFilialid();
+        return getPostid();
     }
 
     @Override
     public Integer component5() {
-        return getPostid();
+        return getFilialid();
     }
 
     @Override
@@ -180,12 +180,12 @@ public class EmployeesRecord extends UpdatableRecordImpl<EmployeesRecord> implem
 
     @Override
     public Integer value4() {
-        return getFilialid();
+        return getPostid();
     }
 
     @Override
     public Integer value5() {
-        return getPostid();
+        return getFilialid();
     }
 
     @Override
@@ -208,13 +208,13 @@ public class EmployeesRecord extends UpdatableRecordImpl<EmployeesRecord> implem
 
     @Override
     public EmployeesRecord value4(Integer value) {
-        setFilialid(value);
+        setPostid(value);
         return this;
     }
 
     @Override
     public EmployeesRecord value5(Integer value) {
-        setPostid(value);
+        setFilialid(value);
         return this;
     }
 
@@ -242,13 +242,13 @@ public class EmployeesRecord extends UpdatableRecordImpl<EmployeesRecord> implem
     /**
      * Create a detached, initialised EmployeesRecord
      */
-    public EmployeesRecord(Integer id, String name, Integer chiefid, Integer filialid, Integer postid) {
+    public EmployeesRecord(Integer id, String name, Integer chiefid, Integer postid, Integer filialid) {
         super(Employees.EMPLOYEES);
 
         setId(id);
         setName(name);
         setChiefid(chiefid);
-        setFilialid(filialid);
         setPostid(postid);
+        setFilialid(filialid);
     }
 }

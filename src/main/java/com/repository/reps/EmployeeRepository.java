@@ -2,6 +2,7 @@ package com.repository.reps;
 
 import com.dto.EmployeeDto;
 import com.dto.FilialDto;
+import com.dto.PostDto;
 import com.mapper.EmployeeRecordMapper;
 import org.jooq.DSLContext;
 import org.jooq.Result;
@@ -44,8 +45,7 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
                 .where(EMPLOYEES.ID.equal(id))
                 .fetchOne();
 
-        return result == null ? null:
-                result.map(r -> mapper.map((EmployeesRecord) r));
+        return result == null ? null : result.into(EmployeeDto.class);
     }
 
     @Override
@@ -78,6 +78,8 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
         return dsl.update(EMPLOYEES)
                 .set(EMPLOYEES.NAME, empl.getName())
                 .set(EMPLOYEES.CHIEFID, empl.getChiefid())
+                .set(EMPLOYEES.POSTID, empl.getPostid())
+                .set(EMPLOYEES.FILIALID, empl.getFilialid())
                 .where(EMPLOYEES.ID.equal(empl.getId()))
                 .returning()
                 .fetchOne()
@@ -106,6 +108,15 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
                 .fetchOne()
                 .into(FilialDto.class);
         return filial.getName();
+    }
+
+    public String findPostNameById(Integer Id){
+        EmployeeDto empl = findById(Id);
+        PostDto post = dsl.selectFrom(POSTS)
+                .where(POSTS.ID.equal(empl.getPostid()))
+                .fetchOne()
+                .into(PostDto.class);
+        return post.getName();
     }
 }
 

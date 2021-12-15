@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
+import org.jooq.codegen.maven.example.tables.Databasechangeloglock;
 import org.jooq.codegen.maven.example.tables.Employees;
 import org.jooq.codegen.maven.example.tables.Filials;
 import org.jooq.codegen.maven.example.tables.Posts;
@@ -28,6 +29,11 @@ public class Public extends SchemaImpl {
      * The reference instance of <code>public</code>
      */
     public static final Public PUBLIC = new Public();
+
+    /**
+     * The table <code>public.databasechangeloglock</code>.
+     */
+    public final Databasechangeloglock DATABASECHANGELOGLOCK = Databasechangeloglock.DATABASECHANGELOGLOCK;
 
     /**
      * The table <code>public.employees</code>.
@@ -65,6 +71,7 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            Databasechangeloglock.DATABASECHANGELOGLOCK,
             Employees.EMPLOYEES,
             Filials.FILIALS,
             Posts.POSTS,

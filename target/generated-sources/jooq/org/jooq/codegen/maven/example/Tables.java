@@ -4,6 +4,7 @@
 package org.jooq.codegen.maven.example;
 
 
+import org.jooq.codegen.maven.example.tables.Databasechangeloglock;
 import org.jooq.codegen.maven.example.tables.Employees;
 import org.jooq.codegen.maven.example.tables.Filials;
 import org.jooq.codegen.maven.example.tables.Posts;
@@ -15,6 +16,11 @@ import org.jooq.codegen.maven.example.tables.Tasks;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>public.databasechangeloglock</code>.
+     */
+    public static final Databasechangeloglock DATABASECHANGELOGLOCK = Databasechangeloglock.DATABASECHANGELOGLOCK;
 
     /**
      * The table <code>public.employees</code>.

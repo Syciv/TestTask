@@ -63,14 +63,14 @@ public class Employees extends TableImpl<EmployeesRecord> {
     public final TableField<EmployeesRecord, Integer> CHIEFID = createField(DSL.name("chiefid"), SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>public.employees.filialid</code>.
-     */
-    public final TableField<EmployeesRecord, Integer> FILIALID = createField(DSL.name("filialid"), SQLDataType.INTEGER, this, "");
-
-    /**
      * The column <code>public.employees.postid</code>.
      */
     public final TableField<EmployeesRecord, Integer> POSTID = createField(DSL.name("postid"), SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>public.employees.filialid</code>.
+     */
+    public final TableField<EmployeesRecord, Integer> FILIALID = createField(DSL.name("filialid"), SQLDataType.INTEGER, this, "");
 
     private Employees(Name alias, Table<EmployeesRecord> aliased) {
         this(alias, aliased, null);
@@ -122,12 +122,12 @@ public class Employees extends TableImpl<EmployeesRecord> {
 
     @Override
     public List<ForeignKey<EmployeesRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.EMPLOYEES__EMPLOYEES_CHIEFID_FKEY, Keys.EMPLOYEES__FILIALS_FK, Keys.EMPLOYEES__POSTS_FK);
+        return Arrays.asList(Keys.EMPLOYEES__EMPLOYEES_CHIEFID_FKEY, Keys.EMPLOYEES__POSTS_FK, Keys.EMPLOYEES__FILIALS_FK);
     }
 
     private transient Employees _employees;
-    private transient Filials _filials;
     private transient Posts _posts;
+    private transient Filials _filials;
 
     public Employees employees() {
         if (_employees == null)
@@ -136,18 +136,18 @@ public class Employees extends TableImpl<EmployeesRecord> {
         return _employees;
     }
 
-    public Filials filials() {
-        if (_filials == null)
-            _filials = new Filials(this, Keys.EMPLOYEES__FILIALS_FK);
-
-        return _filials;
-    }
-
     public Posts posts() {
         if (_posts == null)
             _posts = new Posts(this, Keys.EMPLOYEES__POSTS_FK);
 
         return _posts;
+    }
+
+    public Filials filials() {
+        if (_filials == null)
+            _filials = new Filials(this, Keys.EMPLOYEES__FILIALS_FK);
+
+        return _filials;
     }
 
     @Override
