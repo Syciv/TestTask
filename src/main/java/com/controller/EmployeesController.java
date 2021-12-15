@@ -33,6 +33,11 @@ public class EmployeesController {
         return employeeRepository.findAll();
     }
 
+//    @RequestMapping(value = "/all/{field}", method = RequestMethod.GET)
+//    public List<EmployeeDto> getAllSort(@PathVariable("field") String field){
+//        return employeeRepository.findAll();
+//    }
+
     @RequestMapping(value = "/{id}",  method = RequestMethod.GET)
     public EmployeeDto getById(@PathVariable("id") Integer id){
         return employeeRepository.findById(id);

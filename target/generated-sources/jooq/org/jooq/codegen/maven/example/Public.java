@@ -10,6 +10,8 @@ import java.util.List;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.codegen.maven.example.tables.Employees;
+import org.jooq.codegen.maven.example.tables.Filials;
+import org.jooq.codegen.maven.example.tables.Posts;
 import org.jooq.codegen.maven.example.tables.Tasks;
 import org.jooq.impl.SchemaImpl;
 
@@ -33,6 +35,16 @@ public class Public extends SchemaImpl {
     public final Employees EMPLOYEES = Employees.EMPLOYEES;
 
     /**
+     * The table <code>public.filials</code>.
+     */
+    public final Filials FILIALS = Filials.FILIALS;
+
+    /**
+     * The table <code>public.posts</code>.
+     */
+    public final Posts POSTS = Posts.POSTS;
+
+    /**
      * The table <code>public.tasks</code>.
      */
     public final Tasks TASKS = Tasks.TASKS;
@@ -54,6 +66,8 @@ public class Public extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.asList(
             Employees.EMPLOYEES,
+            Filials.FILIALS,
+            Posts.POSTS,
             Tasks.TASKS
         );
     }

@@ -149,7 +149,7 @@
                         <driver>org.postgresql.Driver</driver>
                         <url>${db.url}</url>
                         <user>${env.PGLOGIN}</user>
-                        <password>${env.PGPASSWORD}</password>
+                        <password>${env.PGPASS}</password>
                     </jdbc>
 
                     <generator>
@@ -162,8 +162,6 @@
                         <target>
                             <packageName>org.jooq.codegen.maven.example</packageName>
                             <directory>target/generated-sources/jooq</directory>
-                            <packageName>com.jooq.db</packageName>
-                            <directory>src/main/java/com/jooq</directory>
                         </target>
                     </generator>
                 </configuration>

@@ -55,17 +55,17 @@ function EmployeeEdit(props) {
                 <FormGroup>
                     <Label for="name">Имя:</Label>
                     <Input type="text" name="name" id="name" defaultValue={employee.name || ''}
-                            onChange={handleChange} autoComplete="name"/>
+                            onChange={handleChange} autoComplete="name" required/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="filial">Филиал:</Label>
-                    <Input type="text" name="filial" id="filial" defaultValue={employee.filial || ''}
-                           onChange={handleChange} autoComplete="filial"/>
+                    <Input  type="text" name="filial" id="filial" defaultValue={employee.filial || ''}
+                           onChange={handleChange} autoComplete="filial" required/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="post">Должность:</Label>
                     <Input type="text" name="post" id="post" defaultValue={employee.post || ''}
-                           onChange={handleChange} autoComplete="post"/>
+                           onChange={handleChange} autoComplete="post" required/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="chiefid">Руководитель:</Label>

@@ -12,15 +12,18 @@ function Employees(props){
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(loadEmployees());
-      }, []);
+    // useEffect(() => {
+    //     dispatch(loadEmployees());
+    //   }, []);
+     console.log(props.employees);
 
     const emplList = props.employees.map(employee => {
-      return <tr key={employee.id}>
-          <td>{employee.id}</td>
+      return 
+      <tr key={employee.id}>
+          <td>{employee.id} </td>
           <td>{employee.name}</td>
           <td>{employee.filial}</td>
+          <td>{employee.post}</td>
           <td>{employee.chiefname}</td>
           <td>{employee.tasksnum}</td>
           <td>
@@ -31,11 +34,11 @@ function Employees(props){
           </td>
           </tr>
       });
-      return (
+      return (  
         <div>
           <Container fluid>
               <div className="float-right">
-                  <Button color="success" tag={Link} to="/employees/new">Добавить сотрудника</Button>
+                  <Button color="success"  tag={Link} to="/employees/new">Добавить сотрудника</Button>
               </div>
               <div className="float-right">
                   <Button color="success" tag={Link} to="/tasks">К задачам</Button>
@@ -45,8 +48,9 @@ function Employees(props){
                   <thead>
                   <tr>
                       <th width="5%" >ID</th>
-                      <th width="15%" >Имя</th>
+                      <th width="15%" >Имя </th>
                       <th width="15%">Филиал</th>
+                      <th width="15%">Должность</th>
                       <th width="15%">Руководитель</th>
                       <th width="15%">Задачи</th>
                       <th width="15%">Действия</th>

@@ -5,6 +5,8 @@ package org.jooq.codegen.maven.example;
 
 
 import org.jooq.codegen.maven.example.tables.Employees;
+import org.jooq.codegen.maven.example.tables.Filials;
+import org.jooq.codegen.maven.example.tables.Posts;
 import org.jooq.codegen.maven.example.tables.Tasks;
 
 
@@ -18,6 +20,16 @@ public class Tables {
      * The table <code>public.employees</code>.
      */
     public static final Employees EMPLOYEES = Employees.EMPLOYEES;
+
+    /**
+     * The table <code>public.filials</code>.
+     */
+    public static final Filials FILIALS = Filials.FILIALS;
+
+    /**
+     * The table <code>public.posts</code>.
+     */
+    public static final Posts POSTS = Posts.POSTS;
 
     /**
      * The table <code>public.tasks</code>.

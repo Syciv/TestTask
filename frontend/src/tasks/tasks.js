@@ -11,9 +11,9 @@ function Tasks(props) {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-      dispatch(loadTasks());
-    }, []);
+  // useEffect(() => {
+  //     dispatch(loadTasks());
+  //   }, []);
 
   const taskList = props.tasks.map(task => {
         return <tr key={task.id}>

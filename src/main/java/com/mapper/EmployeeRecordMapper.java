@@ -18,7 +18,8 @@ public class EmployeeRecordMapper implements RecordMapper<EmployeesRecord, Emplo
     }
 
     @Override
-    public EmployeeDto map(EmployeesRecord record){
+    public EmployeeDto map(EmployeesRecord record)
+    {
         EmployeeDto empl = record.into(EmployeeDto.class);
         var chief = employeeRepository.findById(empl.getChiefid());
         empl.setChiefname(chief == null ? null: chief.getName());

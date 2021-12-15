@@ -53,24 +53,24 @@ public class Employees extends TableImpl<EmployeesRecord> {
     public final TableField<EmployeesRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>public.employees.post</code>.
-     */
-    public final TableField<EmployeesRecord, String> POST = createField(DSL.name("post"), SQLDataType.VARCHAR, this, "");
-
-    /**
      * The column <code>public.employees.name</code>.
      */
     public final TableField<EmployeesRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR, this, "");
 
     /**
-     * The column <code>public.employees.filial</code>.
-     */
-    public final TableField<EmployeesRecord, String> FILIAL = createField(DSL.name("filial"), SQLDataType.VARCHAR, this, "");
-
-    /**
      * The column <code>public.employees.chiefid</code>.
      */
     public final TableField<EmployeesRecord, Integer> CHIEFID = createField(DSL.name("chiefid"), SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>public.employees.filialid</code>.
+     */
+    public final TableField<EmployeesRecord, Integer> FILIALID = createField(DSL.name("filialid"), SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>public.employees.postid</code>.
+     */
+    public final TableField<EmployeesRecord, Integer> POSTID = createField(DSL.name("postid"), SQLDataType.INTEGER, this, "");
 
     private Employees(Name alias, Table<EmployeesRecord> aliased) {
         this(alias, aliased, null);
@@ -122,15 +122,32 @@ public class Employees extends TableImpl<EmployeesRecord> {
 
     @Override
     public List<ForeignKey<EmployeesRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.EMPLOYEES__EMPLOYEES_CHIEFID_FKEY);
+        return Arrays.asList(Keys.EMPLOYEES__EMPLOYEES_CHIEFID_FKEY, Keys.EMPLOYEES__FILIALS_FK, Keys.EMPLOYEES__POSTS_FK);
     }
 
     private transient Employees _employees;
+    private transient Filials _filials;
+    private transient Posts _posts;
 
     public Employees employees() {
         if (_employees == null)
             _employees = new Employees(this, Keys.EMPLOYEES__EMPLOYEES_CHIEFID_FKEY);
+
         return _employees;
+    }
+
+    public Filials filials() {
+        if (_filials == null)
+            _filials = new Filials(this, Keys.EMPLOYEES__FILIALS_FK);
+
+        return _filials;
+    }
+
+    public Posts posts() {
+        if (_posts == null)
+            _posts = new Posts(this, Keys.EMPLOYEES__POSTS_FK);
+
+        return _posts;
     }
 
     @Override
@@ -164,7 +181,7 @@ public class Employees extends TableImpl<EmployeesRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Integer, String, String, String, Integer> fieldsRow() {
+    public Row5<Integer, String, Integer, Integer, Integer> fieldsRow() {
         return (Row5) super.fieldsRow();
     }
 }

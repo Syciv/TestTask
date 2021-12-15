@@ -8,10 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {createStore, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {rootReducer} from './redux/rootReducer';
+import {useEffect} from 'react';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-
-
 
 ReactDOM.render(
   <Provider store={store}>

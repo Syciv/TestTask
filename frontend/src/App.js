@@ -5,9 +5,20 @@ import EmployeeEdit from './employees/employeeEdit';
 import Employees from './employees/employees'
 import Tasks from './tasks/tasks';
 import TaskEdit from './tasks/taskEdit';
+import {connect} from 'react-redux';
+import {loadEmployees, loadTasks} from './redux/actions';
+import {useEffect} from 'react';
+import { useDispatch } from 'react-redux';
 
-class App extends Component {
-  render() {
+function App(props) {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadEmployees());
+        dispatch(loadTasks())
+      }, []);
+
     return (
         <Router>
           <Switch>
@@ -19,6 +30,12 @@ class App extends Component {
         </Router>
     )
   }
+
+function mapStateToProps(state){
+    const {employeeReducer} = state;
+    return {
+      employees: employeeReducer.employees
+    }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);
