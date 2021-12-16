@@ -4,6 +4,7 @@ import com.dto.EmployeeDto;
 import com.dto.TaskDto;
 import com.repository.reps.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public class TasksController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public TaskDto deleteId(@PathVariable("id") Integer id){
+    public ResponseEntity<String> deleteId(@PathVariable("id") Integer id){
         return taskRepository.deleteById(id);
     }
 }

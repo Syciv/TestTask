@@ -6,6 +6,8 @@ import com.repository.CRUDRepository;
 import org.jooq.DSLContext;
 import org.jooq.codegen.maven.example.tables.records.TasksRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -67,12 +69,12 @@ public class TaskRepository implements CRUDRepository<TaskDto> {
     }
 
     @Override
-    public TaskDto deleteById(Integer Id){
+    public ResponseEntity<String> deleteById(Integer Id){
         TaskDto task = findById(Id);
         Boolean executed = dsl.deleteFrom(TASKS)
                 .where(TASKS.ID.equal(Id))
                 .execute() == 1;
-        return task;
+        return new ResponseEntity<>("Ок", HttpStatus.OK);
     }
 
 

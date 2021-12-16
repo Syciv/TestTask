@@ -38,7 +38,7 @@ export function removeEmployee(id){
   return async dispatch => {
     fetch(`/api/employees/${id}`, {
                  method: 'DELETE',
-    }).then(res => res.json())
+    }).then(res => {res.json(); console.log(res)})
     .then(employee =>
       dispatch({
         type:'REMOVE_EMPLOYEE',

@@ -5,7 +5,8 @@ import com.dto.FilialDto;
 import com.dto.PostDto;
 import com.mapper.EmployeeRecordMapper;
 import org.jooq.DSLContext;
-import org.jooq.Result;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.jooq.codegen.maven.example.tables.records.EmployeesRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -55,13 +56,6 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
                 .map(r -> mapper.map((EmployeesRecord) r));
     }
 
-//    @Override
-//    public List<EmployeeDto> findAllSort(String field){
-//        return dsl.selectFrom(EMPLOYEES)
-//                .fetch()
-//                .map(r -> mapper.map((EmployeesRecord) r));
-//    }
-
     public EmployeeDto findChiefById(Integer Id){
         EmployeeDto empl = findById(Id);
         if(empl != null){
@@ -87,12 +81,20 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
     }
 
     @Override
-    public EmployeeDto deleteById(Integer Id){
+    public ResponseEntity<String> deleteById(Integer Id) {
+        Integer taskNum = findTaskNumById(Id);
+        if (taskNum > 0) {
+            return new ResponseEntity<>("У сотрудника есть незавершённые задания.", HttpStatus.OK);
+        }
+        Integer subsNum = findSubNumById(Id);
+        if (subsNum > 0) {
+            return new ResponseEntity<>("У сотрудника есть подчинённые.", HttpStatus.OK);
+        }
         EmployeeDto empl = findById(Id);
         Boolean executed = dsl.deleteFrom(EMPLOYEES)
                 .where(EMPLOYEES.ID.equal(Id))
                 .execute() == 1;
-        return empl;
+        return new ResponseEntity<>("Ок", HttpStatus.OK);
     }
 
     public Integer findTaskNumById(Integer Id){
@@ -100,6 +102,13 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
                 .where(TASKS.EMPLOYEEID.equal(Id))
                 .fetch().size();
     }
+
+    public Integer findSubNumById(Integer Id){
+        return dsl.selectFrom(EMPLOYEES)
+                .where(EMPLOYEES.CHIEFID.equal(Id))
+                .fetch().size();
+    }
+
 
     public String findFilialNameById(Integer Id){
         EmployeeDto empl = findById(Id);

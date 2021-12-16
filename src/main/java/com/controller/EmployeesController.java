@@ -2,6 +2,7 @@ package com.controller;
 
 import com.dto.EmployeeDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.repository.reps.EmployeeRepository;
 
@@ -33,11 +34,6 @@ public class EmployeesController {
         return employeeRepository.findAll();
     }
 
-//    @RequestMapping(value = "/all/{field}", method = RequestMethod.GET)
-//    public List<EmployeeDto> getAllSort(@PathVariable("field") String field){
-//        return employeeRepository.findAll();
-//    }
-
     @RequestMapping(value = "/{id}",  method = RequestMethod.GET)
     public EmployeeDto getById(@PathVariable("id") Integer id){
         return employeeRepository.findById(id);
@@ -49,7 +45,7 @@ public class EmployeesController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public EmployeeDto deleteId(@PathVariable("id") Integer id){
+    public ResponseEntity<String> deleteId(@PathVariable("id") Integer id){
         return employeeRepository.deleteById(id);
     }
 }
