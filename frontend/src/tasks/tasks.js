@@ -8,13 +8,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import {loadTasks, removeTask} from '../redux/actions';
 import useStyles from "../style";
 
+function sortByField(field) {
+    return (a, b) => a[field] > b[field] ? 1 : -1;
+}
+
+
+
 function Tasks(props) {
 
   const dispatch = useDispatch();
 
   const classes = useStyles();
 
-  const taskList = props.tasks.map(task => {
+  var field = 'priority';
+
+  const tasksL = props.tasks;
+
+  const handleClick = event => {
+        taskList.sort(sortByField(event.target.name));
+  }
+
+  var taskList = tasksL.sort(sortByField(field)).map(task => {
         return <tr className={classes.t_row} key={task.id}>
                 <td>{task.id}</td>
                 <td>{task.description}</td>
@@ -31,7 +45,7 @@ function Tasks(props) {
 
         return (
             <div>
-                <Container>
+                <Container className={classes.cont}>
                     <div>
                         <Button align="left" className={classes.button_com} tag={Link} to="/employees">К сотрудникам</Button>
                         <Button align="right" className={classes.button_com} tag={Link} to="/tasks/new">Добавить задачу</Button>
@@ -40,10 +54,10 @@ function Tasks(props) {
                     <Table className={classes.table}>
                         <thead className={classes.t_head}>
                         <tr>
-                            <th width="5%" >ID</th>
-                            <th width="15%">Название</th>
-                            <th width="15%">Исполнитель</th>
-                            <th width="15%">Приоритет</th>
+                            <th name="id" onClick={handleClick} width="5%" >ID</th>
+                            <th name="name" width="15%">Название</th>
+                            <th name="employeeid" width="15%">Исполнитель</th>
+                            <th name="priority" width="15%">Приоритет</th>
                             <th width="15%">Действия</th>
                         </tr>
                         </thead>

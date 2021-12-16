@@ -9,10 +9,12 @@ import useStyles from "../style";
 
 function TaskEdit(props) {
 
+    const firstEmployee = props.employees[1].id;
+
     const emptyTask = {
         description: '',
-        priority: '',
-        employeeid: '1'
+        priority: '1',
+        employeeid: firstEmployee
     };
 
     const [task, setTask] = useState(emptyTask)
@@ -60,12 +62,12 @@ function TaskEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Label className={classes.label} for="priority">Приоритет:</Label><br/>
-                    <Input className={classes.input} type="number" min="1" max="9" onkeypress="return false" name="priority" id="priority" value={task.priority || 1}
+                    <Input className={classes.input} type="number" min="1" max="9" onkeypress="return false" name="priority" id="priority" value={task.priority}
                            onChange={handleChange} autoComplete="priority"/>
                 </FormGroup>
                 <FormGroup>
                     <Label className={classes.label} for="employeeid">Исполнитель:</Label><br/>
-                    <Input className={classes.input} type="select" name="employeeid" id="employeeid" value={task.employeeid || ''}
+                    <Input className={classes.input} type="select" name="employeeid" id="employeeid" value={task.employeeid || firstEmployee}
                            onChange={handleChange} autoComplete="employeeid" required>
                            {props.employees.map(e =>
                              {return (

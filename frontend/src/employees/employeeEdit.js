@@ -45,7 +45,7 @@ function EmployeeEdit(props) {
       else{
         props.addEmployee(employee)
       }
-     //window.location.href ="/employees";
+     window.location.href ="/employees";
     }
 
 
@@ -97,8 +97,8 @@ function EmployeeEdit(props) {
                     </Input>
                 </FormGroup>
                 <FormGroup>
-                    <Button  className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button  className={classes.button_delete} tag={Link} to="/employees">Отменить</Button>
+                    <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
+                    <Button className={classes.button_delete} tag={Link} to="/employees">Отменить</Button>
                 </FormGroup>
             </Form>
         </Container>

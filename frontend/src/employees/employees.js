@@ -34,7 +34,7 @@ function Employees(props){
       });
       return (
         <div>
-          <Container>
+          <Container className={classes.cont}>
               <div >
                   <Button align="left" className={classes.button_com} tag={Link} to="/tasks">К задачам</Button>
                   <Button align="right" className={classes.button_com} tag={Link} to="/employees/new">Добавить сотрудника</Button>
