@@ -52,7 +52,8 @@ const useStyles = createUseStyles({
 	  padding: 5,
     height: 40,
 	  background: '#efefef',
-	  border: '1px solid #eeeeee'
+	  border: '1px solid #eeeeee',
+    cursor: 'pointer'
   },
 
   t_row: {

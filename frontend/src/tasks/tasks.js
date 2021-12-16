@@ -3,15 +3,10 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {bindActionCreators}  from 'redux';
 import {connect} from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {loadTasks, removeTask} from '../redux/actions';
 import useStyles from "../style";
-
-function sortByField(field) {
-    return (a, b) => a[field] > b[field] ? 1 : -1;
-}
-
 
 
 function Tasks(props) {
@@ -20,15 +15,21 @@ function Tasks(props) {
 
   const classes = useStyles();
 
-  var field = 'priority';
-
-  const tasksL = props.tasks;
+  const [sorting, setSorting] = useState({field: 'priority', increase: true})
 
   const handleClick = event => {
-        taskList.sort(sortByField(event.target.name));
+    const name = event.target.getAttribute('name');
+    const increase = name === sorting.field ? !sorting.increase : true;
+    setSorting({['field']: name, ['increase']: increase});
   }
+  const {tasks} = props;
 
-  var taskList = tasksL.sort(sortByField(field)).map(task => {
+  const tasksSorted = tasks.sort(function(a,b){
+     return a[sorting.field]>b[sorting.field] && sorting.increase ? 1 : -1;
+
+  });
+
+  const taskList = tasksSorted.map(task => {
         return <tr className={classes.t_row} key={task.id}>
                 <td>{task.id}</td>
                 <td>{task.description}</td>
@@ -55,9 +56,9 @@ function Tasks(props) {
                         <thead className={classes.t_head}>
                         <tr>
                             <th name="id" onClick={handleClick} width="5%" >ID</th>
-                            <th name="name" width="15%">Название</th>
-                            <th name="employeeid" width="15%">Исполнитель</th>
-                            <th name="priority" width="15%">Приоритет</th>
+                            <th name="description" onClick={handleClick} width="15%">Название</th>
+                            <th name="employeename" onClick={handleClick} width="15%">Исполнитель</th>
+                            <th name="priority" onClick={handleClick} width="15%">Приоритет</th>
                             <th width="15%">Действия</th>
                         </tr>
                         </thead>

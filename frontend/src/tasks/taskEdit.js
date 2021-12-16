@@ -9,7 +9,7 @@ import useStyles from "../style";
 
 function TaskEdit(props) {
 
-    const firstEmployee = props.employees[1].id;
+    const firstEmployee = props.employees[0].id;
 
     const emptyTask = {
         description: '',
@@ -67,7 +67,7 @@ function TaskEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Label className={classes.label} for="employeeid">Исполнитель:</Label><br/>
-                    <Input className={classes.input} type="select" name="employeeid" id="employeeid" value={task.employeeid || firstEmployee}
+                    <Input className={classes.input} type="select" name="employeeid" id="employeeid" value={task.employeeid}
                            onChange={handleChange} autoComplete="employeeid" required>
                            {props.employees.map(e =>
                              {return (
@@ -78,8 +78,8 @@ function TaskEdit(props) {
                     </Input>
                 </FormGroup>
                 <FormGroup>
-                    <Button color="primary" type="submit">Сохранить</Button>{' '}
-                    <Button color="secondary" tag={Link} to="/tasks">Отменить</Button>
+                    <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
+                    <Button className={classes.button_delete} tag={Link} to="/tasks">Отменить</Button>
                 </FormGroup>
             </Form>
         </Container>

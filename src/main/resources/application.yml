@@ -7,6 +7,6 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/TestTask
     username: postgres
-    password: admin
+    password: mosh9990
     hikari:
       connectionTimeout=30000
