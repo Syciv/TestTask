@@ -36,14 +36,20 @@ export function editEmployee(employee){
 
 export function removeEmployee(id){
   return async dispatch => {
-    fetch(`/api/employees/${id}`, {
-                 method: 'DELETE',
-    }).then(res => {res.json(); console.log(res)})
-    .then(employee =>
-      dispatch({
-        type:'REMOVE_EMPLOYEE',
-        id
-      }))
+      await fetch(`/api/employees/${id}`, {
+                  method: 'DELETE',
+                }).then(res => {
+                        if(!res.ok){
+                            res.text().then(function (text) {
+                                  alert(text);
+                            });
+                        } else{
+                          dispatch({
+                            type:'REMOVE_EMPLOYEE',
+                            id
+                          })
+                        }
+      })
   }
 }
 
@@ -98,8 +104,7 @@ export function removeTask(id){
   return async dispatch => {
     fetch(`/api/tasks/${id}`, {
                  method: 'DELETE'
-    }).then(res => res.json())
-    .then(task =>
+    }).then(() =>
       dispatch({
         type:'REMOVE_TASK',
         id

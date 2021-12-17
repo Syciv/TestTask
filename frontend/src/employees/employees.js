@@ -18,6 +18,10 @@ function Employees(props){
 
   const [sorting, setSorting] = useState({field: 'name', increase: true})
 
+  const handleRemoveClick = event => {
+    props.removeEmployee(Number(event.target.id))
+  }
+
   const handleClick = event => {
     const name = event.target.getAttribute('name');
     const increase = name === sorting.field ? !sorting.increase : true;
@@ -39,7 +43,7 @@ function Employees(props){
           <td>
               <ButtonGroup>
                   <Button className={classes.button_com} tag={Link} to={"/employees/" + employee.id}>Изменить</Button>
-                  <Button className={classes.button_delete} onClick={()=> props.removeEmployee(employee.id)} >Удалить</Button>
+                  <Button id={employee.id} className={classes.button_delete} onClick={handleRemoveClick} >Удалить</Button>
               </ButtonGroup>
           </td>
           </tr>

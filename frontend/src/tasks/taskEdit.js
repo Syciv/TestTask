@@ -9,7 +9,7 @@ import useStyles from "../style";
 
 function TaskEdit(props) {
 
-    const firstEmployee = props.employees[0].id;
+    const firstEmployee = props.employees.length > 0 ? props.employees[0].id : '';
 
     const emptyTask = {
         description: '',

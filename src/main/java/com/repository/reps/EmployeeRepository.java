@@ -84,11 +84,11 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
     public ResponseEntity<String> deleteById(Integer Id) {
         Integer taskNum = findTaskNumById(Id);
         if (taskNum > 0) {
-            return new ResponseEntity<>("У сотрудника есть незавершённые задания.", HttpStatus.OK);
+            return new ResponseEntity<>("У сотрудника есть незавершённые задания.", HttpStatus.BAD_REQUEST);
         }
         Integer subsNum = findSubNumById(Id);
         if (subsNum > 0) {
-            return new ResponseEntity<>("У сотрудника есть подчинённые.", HttpStatus.OK);
+            return new ResponseEntity<>("У сотрудника есть подчинённые.", HttpStatus.BAD_REQUEST);
         }
         EmployeeDto empl = findById(Id);
         Boolean executed = dsl.deleteFrom(EMPLOYEES)

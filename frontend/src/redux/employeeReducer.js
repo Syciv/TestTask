@@ -18,6 +18,9 @@ export const employeeReducer = (state = initialState, action) => {
           employees: employees
       }
     case 'REMOVE_EMPLOYEE':
+      const empl = state.employees.map(e => {console.log(Number(action.id));
+        console.log(e.id);
+        console.log(e.id === Number(action.id))})
       return {
         ...state,
         employees: state.employees.filter((employee) => employee.id !== action.id)

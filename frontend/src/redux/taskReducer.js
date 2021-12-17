@@ -18,6 +18,7 @@ export const taskReducer = (state = initialState, action) => {
           tasks: tasks
         }
     case 'REMOVE_TASK':
+        console.log(action.id);
         return {
           ...state,
           tasks: state.tasks.filter((task) => task.id !== action.id)
