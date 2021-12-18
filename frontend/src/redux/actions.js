@@ -39,6 +39,7 @@ export function removeEmployee(id){
       await fetch(`/api/employees/${id}`, {
                   method: 'DELETE',
                 }).then(res => {
+                        // Проверка, возможно ли удалить сотрудника
                         if(!res.ok){
                             res.text().then(function (text) {
                                   alert(text);
@@ -90,7 +91,7 @@ export function editTask(task){
                   'Accept': 'application/json',
                   'Content-Type': 'application/json'
                 },
-                body:  JSON.stringify(task)
+                body: JSON.stringify(task)
     }).then(res => res.json())
     .then(task =>
       dispatch({

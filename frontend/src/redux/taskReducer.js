@@ -25,7 +25,6 @@ export const taskReducer = (state = initialState, action) => {
         };
     case 'LOAD_TASKS':
       const tasksNew = action.data.map(res => {
-        console.log(res);
         return {
           id: res.id,
           priority: res.priority,

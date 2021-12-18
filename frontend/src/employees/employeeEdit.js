@@ -25,32 +25,33 @@ function EmployeeEdit(props) {
           .then((data) => {setEmployee(data);  console.log(data)});
         }
 
-    useEffect(() => {
+  // Получаем редактируемую задачу
+  useEffect(() => {
       if(props.match.params.id !== 'new'){
           getEmployee();
         }
       }, []);
 
+  // Изменение инпутов
   const handleChange = event => {
         const { name, value } = event.target;
         setEmployee({ ...employee, [name]: value });
       }
 
+  // Подтверждение формы, возврат к таблице
   const handleSubmit = event => {
       event.preventDefault();
-      console.log(employee);
       if(employee.id){
         props.editEmployee(employee)
       }
       else{
         props.addEmployee(employee)
       }
-     window.location.href ="/employees";
+     window.location.href ="/";
     }
 
-
-    const title = <h2>{employee.id ? 'Редактировать сотрудника' : 'Добавить сотрудника'}</h2>;
-    return <div>
+  const title = <h2>{employee.id ? 'Редактировать сотрудника' : 'Добавить сотрудника'}</h2>;
+  return <div className={classes.modal}>
         <Container  align="center">
             {title}
             <Form onSubmit={handleSubmit}>
@@ -98,7 +99,7 @@ function EmployeeEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button className={classes.button_delete} tag={Link} to="/employees">Отменить</Button>
+                    <Button className={classes.button_delete} tag={Link} to="/">Отменить</Button>
                 </FormGroup>
             </Form>
         </Container>

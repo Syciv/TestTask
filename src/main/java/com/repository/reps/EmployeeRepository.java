@@ -112,20 +112,18 @@ public class EmployeeRepository implements CRUDRepository<EmployeeDto> {
 
     public String findFilialNameById(Integer Id){
         EmployeeDto empl = findById(Id);
-        FilialDto filial = dsl.selectFrom(FILIALS)
+        var filial = dsl.selectFrom(FILIALS)
                 .where(FILIALS.ID.equal(empl.getFilialid()))
-                .fetchOne()
-                .into(FilialDto.class);
-        return filial.getName();
+                .fetchOne();
+        return filial == null ? null : filial.into(FilialDto.class).getName();
     }
 
     public String findPostNameById(Integer Id){
         EmployeeDto empl = findById(Id);
-        PostDto post = dsl.selectFrom(POSTS)
+        var post = dsl.selectFrom(POSTS)
                 .where(POSTS.ID.equal(empl.getPostid()))
-                .fetchOne()
-                .into(PostDto.class);
-        return post.getName();
+                .fetchOne();
+        return post == null ? null : post.into(PostDto.class).getName();
     }
 }
 

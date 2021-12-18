@@ -4,11 +4,9 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux'
 import reportWebVitals from './reportWebVitals';
-
-import {createStore, compose, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {rootReducer} from './redux/rootReducer';
-import {useEffect} from 'react';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

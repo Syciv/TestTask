@@ -1,43 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import {bindActionCreators}  from 'redux';
 import {connect} from 'react-redux';
-import { useState, useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {loadTasks, removeTask} from '../redux/actions';
+import { useState } from 'react';
+import { removeTask } from '../redux/actions';
 import useStyles from "../style";
 
 
 function Tasks(props) {
 
-  const dispatch = useDispatch();
-
   const classes = useStyles();
 
-  const [sorting, setSorting] = useState({field: 'priority', increase: true})
+  const [sorting, setSorting] = useState({field: 'priority', increase: true});
 
+  // Изменение параметров сортировки при нажатии на заголовок таблицы
   const handleClick = event => {
     const name = event.target.getAttribute('name');
     const increase = name === sorting.field ? !sorting.increase : true;
-    setSorting({['field']: name, ['increase']: increase});
+    setSorting({['field']:name, ['increase']:increase});
   }
   const {tasks} = props;
 
+  // Отсортированный список
   const tasksSorted = tasks.sort(function(a,b){
      return a[sorting.field]>b[sorting.field] && sorting.increase ? 1 : -1;
-
   });
 
   const taskList = tasksSorted.map(task => {
         return <tr className={classes.t_row} key={task.id}>
-                <td>{task.id}</td>
-                <td>{task.description}</td>
-                <td>{task.employeename}</td>
-                <td>{task.priority}</td>
-                <td>
+                <td width="5%">{task.id}</td>
+                <td width="15%">{task.description}</td>
+                <td width="15%">{task.employeename}</td>
+                <td width="15%">{task.priority}</td>
+                <td width="15%">
                     <ButtonGroup>
-                        <Button className={classes.button_com} tag={Link} to={"/tasks/" + task.id}>Изменить</Button>
+                        <Button className={classes.button_com} onClick={() =>
+                          window.location.href = "/tasks/" + task.id}>Изменить</Button>
                         <Button className={classes.button_delete} onClick={() => props.removeTask(task.id)}>Удалить</Button>
                     </ButtonGroup>
                 </td>
@@ -46,12 +44,11 @@ function Tasks(props) {
 
         return (
             <div>
-                <Container className={classes.cont}>
+                <Container>
                     <div>
-                        <Button align="left" className={classes.button_com} tag={Link} to="/employees">К сотрудникам</Button>
-                        <Button align="right" className={classes.button_com} tag={Link} to="/tasks/new">Добавить задачу</Button>
+                      <Button align="right" className={classes.button_com} onClick={() =>
+                        window.location.href = "/tasks/new"}>Добавить задачу</Button>
                     </div>
-                    <h3>Задачи</h3>
                     <Table className={classes.table}>
                         <thead className={classes.t_head}>
                         <tr>
@@ -62,12 +59,17 @@ function Tasks(props) {
                             <th width="15%">Действия</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        {taskList}
-                        </tbody>
                     </Table>
+                    <div className={classes.scroll_table}>
+                    <Table className={classes.table}>
+                      <tbody>
+                          {taskList}
+                      </tbody>
+                    </Table>
+                    </div>
                 </Container>
             </div>
+
         );
     }
 

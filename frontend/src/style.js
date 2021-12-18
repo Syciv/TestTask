@@ -1,19 +1,44 @@
 import { createUseStyles } from "react-jss";
 
-const button = {
+const def = {
   border: 0,
-  borderRadius: 7,
   color: "white",
   fontWeight: 500,
-  margin: 5,
-  padding: 5,
+  padding: 8,
   textDecoration: 'none',
+  transition: '0.3s',
+  fontFamily: 'Segoe UI',
   "&:hover": {
-      backgroundColor: "#162EAE"
+      backgroundColor: "#8183CD"
   }
 }
 
+const button = {
+  ...def,
+  border: 0,
+  borderRadius: 4,
+  margin: 4,
+  cursor: 'pointer',
+  fontSize:15
+}
+
+const tab = {
+  ...def,
+  width: '8%',
+  fontSize: 20,
+}
+
 const useStyles = createUseStyles({
+  tab_nonactive: {
+    ...tab,
+    backgroundColor:  "#9596CD"
+  },
+
+  tab_active: {
+    ...tab,
+    backgroundColor:  "#4e4f9b"
+  },
+
   button_com: {
     ...button,
     backgroundColor:  "#4e4f9b"
@@ -58,16 +83,25 @@ const useStyles = createUseStyles({
 
   t_row: {
     height: 40,
-    border:  '1px solid #eeeeee',
+    border: '1px solid #eeeeee',
   },
 
   cont: {
     margin: 15,
     textAlign: 'left',
+  },
+
+  bottomborder: {
+    borderBottomWidth: 3,
+    borderBottomStyle: 'solid',
+    borderBottomColor: '#4e4f9b'
+  },
+
+  scroll_table: {
+    overflowY: 'auto',
+    maxHeight:'700px',
+    width: '100%'
   }
-
 });
-
-
 
 export default useStyles;
