@@ -4,7 +4,6 @@ const def = {
   border: 0,
   color: "white",
   fontWeight: 500,
-  padding: 8,
   textDecoration: 'none',
   transition: '0.3s',
   fontFamily: 'Segoe UI',
@@ -19,13 +18,15 @@ const button = {
   borderRadius: 4,
   margin: 4,
   cursor: 'pointer',
-  fontSize:15
+  fontSize:15,
+  padding: 7
 }
 
 const tab = {
   ...def,
-  width: '8%',
-  fontSize: 20,
+  width: '10%',
+  fontSize: 15,
+  padding: 5
 }
 
 const useStyles = createUseStyles({

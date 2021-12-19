@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import { useState } from 'react';
 import { removeTask } from '../redux/actions';
 import useStyles from "../style";
-
+import { sortLogic, changeSort } from "../handles"
 
 function Tasks(props) {
 
@@ -15,16 +15,11 @@ function Tasks(props) {
 
   // Изменение параметров сортировки при нажатии на заголовок таблицы
   const handleClick = event => {
-    const name = event.target.getAttribute('name');
-    const increase = name === sorting.field ? !sorting.increase : true;
-    setSorting({['field']:name, ['increase']:increase});
+    changeSort(event, sorting, setSorting);
   }
-  const {tasks} = props;
 
   // Отсортированный список
-  const tasksSorted = tasks.sort(function(a,b){
-     return a[sorting.field]>b[sorting.field] && sorting.increase ? 1 : -1;
-  });
+  const tasksSorted = props.tasks.sort((a, b) => sortLogic(a, b, sorting));
 
   const taskList = tasksSorted.map(task => {
         return <tr className={classes.t_row} key={task.id}>

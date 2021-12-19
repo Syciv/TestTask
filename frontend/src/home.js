@@ -3,6 +3,7 @@ import { Button, Container } from 'reactstrap';
 import Tasks from './tasks/tasks';
 import {  useState, useEffect } from 'react';
 import useStyles from "./style";
+import {useLocation} from "react-router-dom";
 
 function Home(props) {
   // Вкладки для переключения
@@ -13,7 +14,9 @@ function Home(props) {
 
   const classes = useStyles();
 
-  const [activeTab, setActiveTab] = useState(props.match.params.tab ? Number(props.match.params.tab) : 0);
+  const search = useLocation().search;
+  const tab = new URLSearchParams(search).get('tab');
+  const [activeTab, setActiveTab] = useState(tab ? Number(tab) : 0);
 
   // Смена вкладки
   const openTab = event => {

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { useState } from 'react';
 import { removeEmployee} from '../redux/actions';
 import useStyles from "../style";
+import { sortLogic, changeSort } from "../handles"
 
 function Employees(props){
 
@@ -18,15 +19,11 @@ function Employees(props){
 
   // Изменение параметров сортировки при нажатии на заголовок таблицы
   const handleClick = event => {
-    const name = event.target.getAttribute('name');
-    const increase = name === sorting.field ? !sorting.increase : true;
-    setSorting({['field']:name, ['increase']:increase});
+    changeSort(event, sorting, setSorting);
   }
 
   // Отсортированный список
-  const employeesSorted = props.employees.sort(function(a,b){
-      return a[sorting.field]>b[sorting.field] && sorting.increase ? 1 : -1;
-    });
+  const employeesSorted = props.employees.sort((a, b) => sortLogic(a, b, sorting));
 
   // Формирование строк таблицы сотрудников
   const emplList = employeesSorted.map(employee => {

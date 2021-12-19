@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import {addTask, editTask} from '../redux/actions';
 import {connect} from 'react-redux';
 import useStyles from "../style";
+import { submit, change, getEntity } from '../handles'
 
 
 function TaskEdit(props) {
@@ -19,37 +20,16 @@ function TaskEdit(props) {
 
     const classes = useStyles();
 
-    const getTask = () => {
-       return fetch(`/api/tasks/${props.match.params.id}`)
-          .then((response) => response.json())
-          .then((data) =>  setTask(data));
-        }
-
     // Получаем редактируемую задачу
     useEffect(() => {
       if(props.match.params.id !== 'new'){
-          getTask();
-          //console.log(task);
+          getEntity('tasks', props.match.params.id, setTask);
         };
       }, []);
 
-    // Изменение инпутов
+    //Изменение инпутов
     const handleChange = event => {
-      const { name, value } = event.target;
-      setTask({ ...task, [name]: value });
-      console.log(props.employees)
-    }
-
-    // Подтверждение формы, возврат к таблице
-    const handleSubmit = event => {
-      event.preventDefault();
-      if(task.id){
-        props.editTask(task)
-      }
-      else{
-        props.addTask(task)
-      }
-      window.location.href ="/1";
+      change(event, setTask, task)
     }
 
     const title = <h2>{task.id ? 'Редактировать задачу' : 'Добавить задачу'}</h2>;
@@ -59,7 +39,7 @@ function TaskEdit(props) {
     return <div>
         <Container align="center">
             {title}
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={(event) => submit(event, props.editTask, props.addTask, task, 1)}>
                 <FormGroup>
                     <Label className={classes.label} for="description">Описание:</Label><br/>
                     <Input className={classes.input} type="textarea" name="description" id="description" value={task.description || ''}
@@ -85,7 +65,7 @@ function TaskEdit(props) {
                 </FormGroup>
                 <FormGroup>
                     <Button className={classes.button_com} type="submit">Сохранить</Button>{' '}
-                    <Button className={classes.button_delete} tag={Link} to="/1">Отменить</Button>
+                    <Button className={classes.button_delete} tag={Link} to="/?tab=1">Отменить</Button>
                 </FormGroup>
             </Form>
         </Container>
@@ -103,6 +83,5 @@ function TaskEdit(props) {
          addTask,
          editTask
   }
-
 
   export default connect(mapStateToProps, mapDispatchToProps)(TaskEdit);

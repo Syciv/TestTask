@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import {addEmployee, editEmployee} from '../redux/actions';
 import {connect} from 'react-redux';
 import useStyles from "../style";
+import { submit, change, getEntity } from '../handles'
 
 function EmployeeEdit(props) {
 
@@ -19,42 +20,23 @@ function EmployeeEdit(props) {
 
   const classes = useStyles();
 
-  const getEmployee = () => {
-       return fetch(`/api/employees/${props.match.params.id}`)
-          .then((response) => response.json())
-          .then((data) => {setEmployee(data);  console.log(data)});
-        }
-
   // Получаем редактируемую задачу
   useEffect(() => {
       if(props.match.params.id !== 'new'){
-          getEmployee();
+          getEntity('employees', props.match.params.id, setEmployee);
         }
       }, []);
 
   // Изменение инпутов
   const handleChange = event => {
-        const { name, value } = event.target;
-        setEmployee({ ...employee, [name]: value });
+        change(event, setEmployee, employee)
       }
-
-  // Подтверждение формы, возврат к таблице
-  const handleSubmit = event => {
-      event.preventDefault();
-      if(employee.id){
-        props.editEmployee(employee)
-      }
-      else{
-        props.addEmployee(employee)
-      }
-     window.location.href ="/";
-    }
 
   const title = <h2>{employee.id ? 'Редактировать сотрудника' : 'Добавить сотрудника'}</h2>;
   return <div className={classes.modal}>
         <Container  align="center">
             {title}
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={(event) => submit(event, props.editEmployee, props.addEmployee, employee, 0)}>
                 <FormGroup>
                     <Label className={classes.label} for="name">Имя:</Label><br/>
                     <Input className={classes.input} type="text" name="name" id="name" value={employee.name || ''}
