@@ -37,3 +37,6 @@ INSERT INTO filials(name) values ('Северный'), ('Южный'), ('Зап�
 INSERT INTO posts(name) values ('Инженер'), ('Механик'), ('Медик'), ('Капитан');
 
 
+
+--changeset liquibase:3
+ALTER TABLE Tasks ADD CONSTRAINT priority_check CHECK (priority > 0 AND priority < 10);

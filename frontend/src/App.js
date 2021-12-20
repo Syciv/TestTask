@@ -11,16 +11,18 @@ import { useDispatch } from 'react-redux';
 
 function App(props) {
 
-    const dispatch = useDispatch();
 
-    useEffect(() => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
         dispatch(loadEmployees());
         dispatch(loadTasks());
         dispatch(loadFilials());
         dispatch(loadPosts())
       }, []);
 
-return(
+  document.title = 'Тестовое задание'
+  return(
     <Router>
       <Switch>
         <Route path='/' exact={true} component={Home}/>
